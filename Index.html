@@ -6,5 +6,36 @@
 </head>
 <body>
 
+<div id="info"></div>
+
+<script>
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://api.openweathermap.org/data/2.5/weather?q=Helsinki%2Cfi&appid=114332134ea7ed53cb7a0e88a863eb5d";
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            myFunction(myArr);
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    function myFunction(arr) {
+        var out = "";
+        var cityName = arr.name;
+        var country = arr.sys.country;
+        var temp = arr.main.temp;
+        var clouds = arr.weather[0].description;
+        var humidity = arr.main.humidity;
+        var coords = {lon: arr.coord.lon, lat: arr.coord.lat};
+        var pressure = arr.main.pressure;
+        var wind = {speed: arr.wind.speed, deg: arr.wind.deg};
+
+
+        document.getElementById("info").innerHTML = out;
+    }
+</script>
+
 </body>
 </html>
