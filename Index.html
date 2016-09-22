@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
 <body>
 
-<div id="info"></div>
+<h1 id="otsikko"></h1>
+<div id="saa">
+    <img id="image">
+</div>
+<table id="info"></table>
+
 
 
 <script>
@@ -24,7 +46,6 @@
     xmlhttp.send();
 
     function myFunction(arr) {
-        var out = "";
         var cityName = arr.name;
         var country = arr.sys.country;
 
@@ -33,6 +54,7 @@
         temp += " &#8451"; // lisätään lämpötilaan celsius merkki
 
         var clouds = arr.weather[0].description;
+        clouds = clouds.charAt(0).toUpperCase() + clouds.slice(1); // tehdään ensimmäisestä kirjaimesta iso
 
         var humidity = arr.main.humidity;
         humidity += " %";
@@ -45,14 +67,24 @@
 
         imageUrl += arr.weather[0].icon + ".png"; // liitetään img urliin iconin tunnus
 
-        img = document.createElement('img'); // luodaan image
+        img = document.getElementById("image"); // haetaan image
         img.src = imageUrl; // lisätään imagelle lähde
-        document.body.appendChild(img); // lisätään image bodyyn
 
-        out = cityName + ", " + country + ", " + temp + ", " + clouds + ", " + humidity;
 
-        document.getElementById("info").innerHTML = out;
+        var outOtsikko = "Weather in " + cityName + ", " + country;
+
+        var outTable = '<tr><th>Wind</th>' + '<th>Cloudiness</th>' + '<th>Pressure</th>' + '<th>Humidity</th>' +
+                '<th>Geo coords</th></tr>';
+
+        outTable += '<tr><th>' + wind.speed + " m/s, " + wind.deg + '</th><th>' + clouds + '</th><th>' + pressure + '</th><th>' + humidity + '</th><th>' +
+               coords.lat + ", " + coords.lon + '</th></tr>';
+
+        document.getElementById("otsikko").innerHTML = outOtsikko;
+        document.getElementById("info").innerHTML = outTable;
+        document.getElementById("saa").innerHTML += temp;
+
     }
+
 </script>
 
 </body>
