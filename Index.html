@@ -3,33 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="WeatherStyle.css">
 </head>
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
 
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
 <body>
 
 <h1 id="otsikko"></h1>
 <div id="saa">
     <img id="image">
 </div>
+
 <table id="info"></table>
 
+<div id="map-canvas"></div>
+
+<div id="map"></div>
+
+
+<script src="Map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV0fw4VypJ8LKz1x_CEFGtS78AGihCWys&callback=initMap" async defer></script>
 <script src="Weather.js"></script>
+
 
 </body>
 </html>

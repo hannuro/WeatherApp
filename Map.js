@@ -8,17 +8,22 @@ var contents = [];
 var infowindows = [];
 var map;
 
-var xmlhttp = new XMLHttpRequest();
-var url = "http://api.citybik.es/v2/networks/citybikes-helsinki";
+var image = {
+    url: "bicycle.png"
+};
 
-xmlhttp.onreadystatechange = function() {
+
+var xmlhttp2 = new XMLHttpRequest();
+var url2 = "http://api.citybik.es/v2/networks/citybikes-helsinki";
+
+xmlhttp2.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-        var myArr = JSON.parse(this.responseText);
-        myFunction(myArr.network);
+        var myArr2 = JSON.parse(this.responseText);
+        myFunction2(myArr2.network);
     }
 };
-xmlhttp.open("GET", url, true);
-xmlhttp.send();
+xmlhttp2.open("GET", url2, true);
+xmlhttp2.send();
 
 function initMap() {
     var myLatLng = {lat: 60.171190, lng: 24.937892};
@@ -29,19 +34,21 @@ function initMap() {
     });
 }
 
-function myFunction(arr) {
+
+function myFunction2(arr2) {
     var i;
 
-    for(i = 0; i < arr.stations.length; i++) {
-        var asemaLatLong = {lat: arr.stations[i].latitude, lng: arr.stations[i].longitude};
+    for(i = 0; i < arr2.stations.length; i++) {
+        var asemaLatLong = {lat: arr2.stations[i].latitude, lng: arr2.stations[i].longitude};
         markers[i] = new google.maps.Marker({
             position: asemaLatLong,
             map: map,
+            icon: image,
             title: 'samplemarker'
         });
 
         markers[i].index = i; //add index property
-        contents[i] = arr.stations[i].name + "<br>"  +"Pyöriä vapaana: " + arr.stations[i].free_bikes + "<br> " + "Pyöriä käytössä: " + arr.stations[i].empty_slots
+        contents[i] = arr2.stations[i].name + "<br>"  +"Pyöriä vapaana: " + arr2.stations[i].free_bikes + "<br> " + "Pyöriä käytössä: " + arr2.stations[i].empty_slots
 
         infowindows[i] = new google.maps.InfoWindow({
             content: contents[i],
@@ -55,8 +62,5 @@ function myFunction(arr) {
             map.panTo(markers[this.index].getPosition());
 
         });
-
-
-
     }
 }

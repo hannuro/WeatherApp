@@ -1,0 +1,33 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #13433e;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #febaad;
+}
+tr:nth-child(odd) {
+    background-color: #dddddd;
+}
+#map {
+    height: 50%;
+}
+div, h1 {
+    text-align: center;
+}
+#saa{
+    font-size: 150%;
+}

@@ -46,7 +46,7 @@ function myFunction(arr) {
     var outTable = '<tr><th>Wind</th>' + '<th>Cloudiness</th>' + '<th>Pressure</th>' + '<th>Humidity</th>' +
         '<th>Geo coords</th></tr>';
 
-    outTable += '<tr><th>' + wind.speed + " m/s, " + wind.deg + '</th><th>' + clouds + '</th><th>' + pressure + '</th><th>' + humidity + '</th><th>' +
+    outTable += '<tr><th>' + wind.speed + " m/s, " + '</th><th>' + clouds + '</th><th>' + pressure + '</th><th>' + humidity + '</th><th>' +
         coords.lat + ", " + coords.lon + '</th></tr>';
 
     document.getElementById("otsikko").innerHTML = outOtsikko;
