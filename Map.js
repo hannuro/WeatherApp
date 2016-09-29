@@ -7,6 +7,7 @@ var markers=[];
 var contents = [];
 var infowindows = [];
 var map;
+var closeIndex = [];
 
 var image = {
     url: "bicycle.png"
@@ -44,9 +45,10 @@ function myFunction2(arr2) {
             position: asemaLatLong,
             map: map,
             icon: image,
-            title: 'samplemarker'
+            title: arr2.stations[i].name
         });
 
+        closeIndex[i] = 0;
         markers[i].index = i; //add index property
         contents[i] = arr2.stations[i].name + "<br>"  +"Pyöriä vapaana: " + arr2.stations[i].free_bikes + "<br> " + "Pyöriä käytössä: " + arr2.stations[i].empty_slots
 
@@ -56,10 +58,17 @@ function myFunction2(arr2) {
         });
 
         google.maps.event.addListener(markers[i], 'click', function() {
-            console.log(this.index); // this will give correct index
-            console.log(i); //this will always give 10 for you
-            infowindows[this.index].open(map,markers[this.index]);
-            map.panTo(markers[this.index].getPosition());
+            if(closeIndex[this.index] == 0) {
+                console.log(this.index); // this will give correct index
+                console.log(i); //this will always give 10 for you
+                infowindows[this.index].open(map, markers[this.index]);
+                map.panTo(markers[this.index].getPosition());
+                closeIndex[this.index] = 1;
+            }
+            else{
+                infowindows[this.index].close();
+                closeIndex[this.index] = 0;
+            }
 
         });
     }
